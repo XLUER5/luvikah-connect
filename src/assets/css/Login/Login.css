@@ -1,0 +1,26 @@
+.app {
+  min-height: 100vh;
+}
+
+.principal-section {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-lg-start {
+  font-family: "Gotham";
+}
+
+.btn-login {
+  width: 40%;
+  background-color: #0606aa !important;
+  color: white !important;
+  font-family: "Gotham";
+}
+
+.img-logo {
+  width: 60%;
+}
+

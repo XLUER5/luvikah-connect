@@ -1,0 +1,16 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("./assets/Font/GothamMedium.otf");
+}
+
+@font-face {
+  font-family: "Aneasterina";
+  src: url("./assets/Font/Aneasterina.otf");
+}
