@@ -1,10 +1,24 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import Nav from 'react-bootstrap/Nav';
+import Nav from "react-bootstrap/Nav";
 import logo from "../assets/img/imagen2.png";
 import "../assets/css/Navbar.css";
+import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const NavbarApp = () => {
+  const Logout = () => {
+    localStorage.removeItem("user");
+    location.reload(true);
+  };
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("user"));
+    setUser(savedData)
+  }, []);
+
   return (
     <>
       <Navbar bg="primary">
@@ -14,11 +28,15 @@ export const NavbarApp = () => {
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-          <Nav className="ml-auto">
-            <Nav.Link href="#home">Inicio</Nav.Link>
-            <Nav.Link href="#features">Perfil</Nav.Link>
-            <Nav.Link href="#pricing">Cerrar Sesion</Nav.Link>
-          </Nav>
+            <Nav className="ml-auto">
+              <NavLink className={"nav-link"} to={"/posts"}>
+                Inicio
+              </NavLink>
+              <NavLink className={"nav-link"} to={`/profile/${user.username}`}>
+                Perfil
+              </NavLink>
+              <Nav.Link onClick={() => Logout()}>Cerrar Sesion</Nav.Link>
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>

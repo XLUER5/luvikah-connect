@@ -2,7 +2,22 @@
   width: 10%;
 }
 
-.nav-link{
-  color: #FFF;
+.nav-link {
+  color: #fff;
   font-family: "Gotham";
+}
+
+.active{
+  color: #6be865 !important;
+  font-family: "Gotham";
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .img-navbar {
+    width: 40%;
+  }
+  .nav-link{
+    font-size: 12px;
+  }
 }

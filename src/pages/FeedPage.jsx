@@ -41,6 +41,16 @@ export const FeedPage = () => {
       fecha: "04/12/2023",
       comentario: "Mi primera Chamba",
     },
+    {
+      id: 2,
+      user: "lestrada",
+      userImg: "https://randomuser.me/api/portraits/men/81.jpg",
+      img: "https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      likes: 20,
+      liked: false,
+      fecha: "04/12/2023",
+      comentario: "Mi chicharron favorito",
+    },
   ]);
 
   return (

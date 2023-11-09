@@ -24,3 +24,22 @@
   width: 60%;
 }
 
+.btn-login-google{
+  width: 40%;
+  border: 2px solid #0606aa;
+  font-family: "Gotham";
+  font-size: 14px;
+}
+
+.error{
+  color: red;
+  font-family: "Gotham";
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .btn-login{
+    width: 60%;
+  }
+}
+
