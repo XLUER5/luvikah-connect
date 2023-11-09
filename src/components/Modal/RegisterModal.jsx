@@ -1,14 +1,28 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { endPoint } from "../../config/config";
 
-export const RegisterModal = ({ show, handleClose }) => {
+export const RegisterModal = ({ show, handleClose, setGoogleData }) => {
+  useEffect(() => {
+    if (Object.keys(setGoogleData).length > 0) {
+      console.log(setGoogleData);
+      setValue("nombre", setGoogleData.given_name);
+      setValue("apellido", setGoogleData.family_name);
+      setValue("email", setGoogleData.email);
+    }
+  }, [setGoogleData]);
+
+  const cleanModal = () => {
+    reset();
+  };
+
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -55,7 +69,13 @@ export const RegisterModal = ({ show, handleClose }) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        onHide={() => {
+          handleClose();
+          cleanModal();
+        }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Nuevo Registro</Modal.Title>
         </Modal.Header>

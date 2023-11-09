@@ -21,10 +21,12 @@ export const LoginPage = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
 
   const [show, setShow] = useState(false);
+  const [googleData, setGoogleData] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -74,7 +76,8 @@ export const LoginPage = () => {
 
   function handleCallBackResponse(response) {
     const userObject = jwt_decode(response.credential);
-    console.log(userObject);
+    setGoogleData(userObject);
+    setShow(true);
   }
 
   useEffect(() => {
@@ -177,7 +180,7 @@ export const LoginPage = () => {
           </div>
         </div>
       </section>
-      <RegisterModal show={show} handleClose={handleClose} />
+      <RegisterModal show={show} handleClose={handleClose} setGoogleData={googleData} />
     </div>
   );
 };
