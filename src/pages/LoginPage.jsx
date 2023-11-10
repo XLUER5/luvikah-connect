@@ -110,7 +110,7 @@ export const LoginPage = () => {
             <div className="col-md-6">
               <div className="card">
                 <div className="card-body">
-                  <form action="">
+                  <form autoComplete="off" action="">
                     <div className="row ">
                       <div className="col-md-12">
                         <input
