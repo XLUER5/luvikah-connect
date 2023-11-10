@@ -7,5 +7,6 @@ export const endPoint = {
   getGaleria: "galeria",
   subirImagen: "galeria/subirImagen",
   galeriaPerfil: "galeria/galeriaUsuario",
-  newComentario: "comentario"
+  newComentario: "comentario",
+  votar: "votar",
 };

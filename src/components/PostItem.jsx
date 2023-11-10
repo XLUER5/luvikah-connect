@@ -47,8 +47,48 @@ export const PostItem = ({
     navigate("/profile/" + user);
   };
 
-  const newLike = () => {
-    alert("Nuevo Like para el post " + idGaleria + "");
+  const newLike = async () => {
+
+    Swal.fire({
+      title: "Por favor espere",
+      html: "Registrando Voto",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    const savedData = JSON.parse(localStorage.getItem("user"));
+    const idUsuario = savedData.id;
+
+    const payload = {
+      idGaleria: idGaleria,
+      idUser: idUsuario,
+    };
+
+    const response = await fetch(endPoint.baseURL + endPoint.votar, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const dataResponse = await response.json();
+
+    if (dataResponse.status === 200) {
+      Swal.close();
+      getGaleria();
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: dataResponse.mensaje,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   const onSubmit = async (data) => {
@@ -194,7 +234,7 @@ export const PostItem = ({
                     className="btn d-flex justify-content-center align-items-center gap-2 px-0"
                   >
                     <span className="material-icons-round">
-                      {liked === true ? <ThumbUpAltOutlined /> : <ThumbUp />}
+                      {liked === "0" ? <ThumbUpAltOutlined /> : <ThumbUp />}
                     </span>
                     Me gusta
                   </button>

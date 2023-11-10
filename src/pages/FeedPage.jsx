@@ -20,12 +20,17 @@ export const FeedPage = () => {
   }, []);
 
   const getGaleria = async () => {
-    const response = await fetch(endPoint.baseURL + endPoint.getGaleria, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const savedData = JSON.parse(localStorage.getItem("user"));
+
+    const response = await fetch(
+      endPoint.baseURL + endPoint.getGaleria + "/" + savedData.id,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const dataResponse = await response.json();
 
