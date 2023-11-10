@@ -1,68 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PrincipalLayout } from "../Layout/PrincipalLayout";
 import { PostItem } from "../components/PostItem";
 import "../assets/css/Feed/Feed.css";
+import { endPoint } from "../config/config";
+import Swal from "sweetalert2";
+import { UploadModal } from "../components/Modal/UploadModal";
 
 export const FeedPage = () => {
-  const [post, setPost] = useState([
-    {
-      id: 1,
-      user: "lestrada",
-      userImg: "https://randomuser.me/api/portraits/men/81.jpg",
-      img: "https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      likes: 20,
-      liked: true,
-      fecha: "04/12/2023",
-      comentario: "Mi primera Chamba",
-      comentarios: [
-        {
-          id: 1,
-          user: "varturo",
-          comentario: "Bonita Foto",
-          commentImg: "https://randomuser.me/api/portraits/men/81.jpg",
-          fecha: "04/11/2023",
-        },
-        {
-          id: 2,
-          user: "kbarrera",
-          comentario: "Bonito Paisaje",
-          commentImg: "https://randomuser.me/api/portraits/men/81.jpg",
-          fecha: "04/11/2023",
-        }
-      ],
-    },
-    {
-      id: 2,
-      user: "lestrada",
-      userImg: "https://randomuser.me/api/portraits/men/81.jpg",
-      img: "https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      likes: 20,
-      liked: false,
-      fecha: "04/12/2023",
-      comentario: "Mi primera Chamba",
-    },
-    {
-      id: 2,
-      user: "lestrada",
-      userImg: "https://randomuser.me/api/portraits/men/81.jpg",
-      img: "https://images.pexels.com/photos/169647/pexels-photo-169647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      likes: 20,
-      liked: false,
-      fecha: "04/12/2023",
-      comentario: "Mi chicharron favorito",
-    },
-  ]);
+  const [post, setPost] = useState([]);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+
+  const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    getGaleria();
+  }, []);
+
+  const getGaleria = async () => {
+    const response = await fetch(endPoint.baseURL + endPoint.getGaleria, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const dataResponse = await response.json();
+
+    if (response.ok) {
+      setPost(dataResponse);
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "Ocurrio un error al descargar fotos",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
 
   return (
     <PrincipalLayout>
       <div className="post-container">
+        <button onClick={() => handleShow()} className="btn btn-primary mt-2">
+          NUEVO POST
+        </button>
+
         {post.map((post) => (
           <PostItem
             key={post.id}
             user={post.user}
             userImg={post.userImg}
             fecha={post.fecha}
-            img={post.img}
+            img={"http://localhost:8000/imagenes/" + post.img}
             comentario={post.comentario}
             likes={post.likes}
             liked={post.liked}
@@ -70,6 +63,11 @@ export const FeedPage = () => {
           />
         ))}
       </div>
+      <UploadModal
+        handleClose={handleClose}
+        show={show}
+        getGaleria={getGaleria}
+      />
     </PrincipalLayout>
   );
 };

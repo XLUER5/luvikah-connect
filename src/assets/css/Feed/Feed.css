@@ -35,8 +35,10 @@
 }
 
 .single-post {
-  max-width: 50%;
+  max-width: 70%;
 }
+
+
 
 @media (max-width: 768px) {
   .single-post {

@@ -4,4 +4,6 @@ export const endPoint = {
   register: "user",
   getPerfil: "user/getPerfil",
   updatePerfil: "user/updatePerfil",
+  getGaleria: "galeria",
+  subirImagen: "galeria/subirImagen"
 };

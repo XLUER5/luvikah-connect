@@ -1,0 +1,66 @@
+.form-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 5px solid #0d56cd;
+    height: 40vh;
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .previsualizar-img {
+    width: 45%;
+    max-height: 39vh;
+  }
+  
+  .progress-bar{
+    background-color: #FFCA00 !important ;
+    color: #0d56cd;
+    font-family: "Gotham";
+  }
+  
+  .title-progress{
+    font-family: 'Gotham';
+    color: #fff;
+    font-size: 25px;
+  }
+  
+  .subtitle-progress{
+    font-family: 'Gotham';
+    color: #fff;
+    font-size: 20px;
+    margin-top: 2%;
+  }
+  
+  .filename {
+    color: #252525;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px; /* 100% */
+  }
+  
+  .text-left {
+    text-align: left;
+  }
+  
+  .boton-subir {
+    width: 25%;
+    cursor: pointer;
+  }
+  
+  .boton-subir:hover {
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 768px) {
+    .previsualizar-img {
+      width: 60%;
+      max-height: 35vh;
+    }
+  }
+  

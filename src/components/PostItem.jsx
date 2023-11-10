@@ -36,7 +36,9 @@ export const PostItem = ({
       </div>
       <div className="card-body">
         <p className="card-text mb-1">{comentario}</p>
-        <img src={img} alt="post img" className="post-img" />
+        <div className="text-center">
+          <img src={img} alt="post img" className="post-img" />
+        </div>
         <ul className="list-group">
           <li className="list-group-item text-muted">
             {`A ${likes} personas le gusta tu post`}
