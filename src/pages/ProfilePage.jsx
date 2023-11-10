@@ -7,6 +7,7 @@ import { endPoint } from "../config/config";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { get, useForm } from "react-hook-form";
+import { PostItem } from "../components/PostItem";
 
 export const ProfilePage = () => {
   const {
@@ -26,16 +27,60 @@ export const ProfilePage = () => {
   const [newImage, setNewImage] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    getGaleria();
+  }, []);
+
+  useEffect(() => {
+    getGaleria();
+  }, [user]);
+
+  const getGaleria = async () => {
+    const savedData = JSON.parse(localStorage.getItem("user"));
+
+    const data = { idUsuario: user };
+
+    const response = await fetch(endPoint.baseURL + endPoint.galeriaPerfil, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const dataResponse = await response.json();
+
+    if (response.ok) {
+      setPost(dataResponse);
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "Ocurrio un error al descargar fotos",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
   useEffect(() => {
     getProfile();
     const savedData = JSON.parse(localStorage.getItem("user"));
     setUser(savedData);
   }, []);
 
+  useEffect(() => {
+    getProfile();
+    const savedData = JSON.parse(localStorage.getItem("user"));
+    setUser(savedData);
+  }, [user]);
+
   const getProfile = async () => {
     const data = { username: user };
 
-    const response = await fetch(endPoint.baseURL + endPoint.register, {
+    const response = await fetch(endPoint.baseURL + endPoint.getPerfil, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -108,7 +153,7 @@ export const ProfilePage = () => {
 
   return (
     <PrincipalLayout>
-      <Card className="w-75">
+      <Card className="w-75 mt-5">
         <Card.Body>
           <div className="text-center">
             <h2>Mi Perfil</h2>
@@ -117,15 +162,11 @@ export const ProfilePage = () => {
             <div className="col-md-6 ">
               <div className="text-center d-flex justify-content-center align-items-center flex-column">
                 <img
-                  src="https://randomuser.me/api/portraits/men/81.jpg"
+                  src="https://randomuser.me/api/portraits/lego/1.jpg"
                   alt=""
                   style={{ width: "50%" }}
                 />
-                {savedData.username === userData.username ? (
-                  <button className="btn btn-primary mt-2">
-                    Cambiar Imagen
-                  </button>
-                ) : null}
+                {savedData.username === userData.username ? <></> : null}
               </div>
             </div>
             <div className="col-md-6">
@@ -235,6 +276,24 @@ export const ProfilePage = () => {
           </div>
         </Card.Body>
       </Card>
+
+      <div className="container-image">
+        {post.map((post) => (
+          <PostItem
+            key={post.id}
+            idGaleria={post.id}
+            getGaleria={getGaleria}
+            user={post.user}
+            userImg={post.userImg}
+            fecha={post.fecha}
+            img={"http://localhost:8000/imagenes/" + post.img}
+            comentario={post.comentario}
+            likes={post.likes}
+            liked={post.liked}
+            comentarios={post.comentarios}
+          />
+        ))}
+      </div>
     </PrincipalLayout>
   );
 };

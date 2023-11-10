@@ -16,6 +16,14 @@
   font-size: 0.8em;
 }
 
+.header-h4:hover{
+  cursor: pointer;
+}
+
+.show-image{
+  width: 90%;
+}
+
 .card-header-title {
   line-height: 0.7;
 }
@@ -36,6 +44,7 @@
 
 .single-post {
   max-width: 70%;
+  width: 70%;
 }
 
 

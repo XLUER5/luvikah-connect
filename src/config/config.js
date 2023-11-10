@@ -5,5 +5,7 @@ export const endPoint = {
   getPerfil: "user/getPerfil",
   updatePerfil: "user/updatePerfil",
   getGaleria: "galeria",
-  subirImagen: "galeria/subirImagen"
+  subirImagen: "galeria/subirImagen",
+  galeriaPerfil: "galeria/galeriaUsuario",
+  newComentario: "comentario"
 };

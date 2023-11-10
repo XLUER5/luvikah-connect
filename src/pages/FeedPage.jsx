@@ -52,6 +52,8 @@ export const FeedPage = () => {
         {post.map((post) => (
           <PostItem
             key={post.id}
+            getGaleria={getGaleria}
+            idGaleria={post.id}
             user={post.user}
             userImg={post.userImg}
             fecha={post.fecha}
