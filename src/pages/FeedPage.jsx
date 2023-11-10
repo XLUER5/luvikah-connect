@@ -62,7 +62,7 @@ export const FeedPage = () => {
             user={post.user}
             userImg={post.userImg}
             fecha={post.fecha}
-            img={"http://localhost:8000/imagenes/" + post.img}
+            img={"http://18.117.78.96:8000/imagenes/" + post.img}
             comentario={post.comentario}
             likes={post.likes}
             liked={post.liked}
